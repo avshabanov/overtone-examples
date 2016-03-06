@@ -27,12 +27,14 @@
                 [note 60 level 1 loop? 0]
                 (scaled-play-buf 1 piano :level level :loop loop? :action FREE))
 
+       ;; rate changes sound's tone
        (definst i-piano2
                 [note 60 level 1 rate 1 loop? 0 attack 0 decay 1 sustain 1 release 0.1 curve -4 gate 1]
                 (let [env (env-gen (adsr attack decay sustain release level curve)
                             :gate gate
                             :action FREE)]
-                  (scaled-play-buf 1 piano :level level :loop loop? :action FREE)))
+                  (scaled-play-buf 1 piano :rate rate :level level :loop loop? :action FREE)))
+       ;; different notes - (i-piano2 :rate 1) (i-piano2 :rate 0.7) (i-piano2 :rate 1.2)
 
        ;; flute sample + instrument
        (def flute (sample "~/Music/Samples/Flute.wav"))
